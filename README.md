@@ -1,15 +1,15 @@
 # Heart disease project
 
 This project shows development of Machine Learning and Neural Network models for heart diseseases prognosis.
-Nowadays computer technologies are developing very fast in different areas of humen life. With development of computational computer resources it became more easy to work with big data. Modern medicine is also develoiping very fast and includes many new and well-known methods of analysis. Accessibility of medicine improves quality of analysis and prognosis for patients. Now personilized medical approach is becomeing more common as well as preventive medicine. It is very convenient to have easy to use and reliable tools for comprehensive patient's health analysis. This tool can help doctors to pay more attention to individual profile of patients and their susceptibility to diseases. Modern machine learning models can help to develop such tools (Chang et al., 2022).
+Nowadays computer technologies are developing very fast in different areas of human life. With development of computational resources it became more easy to work with big data. Modern medicine is also developing very fast and includes many new and well-known methods of analysis. Accessibility of medicine improves quality of analysis and prognosis for patients. Now personilized medical approach is becoming more common as well as preventive medicine. It is very convenient to have easy to use and reliable tools for comprehensive patient's health analysis. This tool can help doctors to pay more attention to individual profile of patients and their susceptibility to diseases. Modern machine learning models can help to develop such tools (Chang et al., 2022).
 
 # Aim
 The research aims to prognose patient's heart disease using results from database from other patients with a help of python tools of Machine Learning and Deep Learning.
 
-Machine Learning (ML) is important in predicting the existence or absence of heart arrhythmia, locomotor disorders, heart diseases, and other conditions. It was expected well to provide significant insights to physicians, allowing them to adjust their diagnosis and care on a patient-by-patient basis (Chang et al., 2022). In this project I used linear regression model, random forest classifier, catboost algorithm and simple tensorflow network for binary classification.
+Machine Learning (ML) is an important tool for prediction of the existence or absence of heart arrhythmia, locomotor disorders, heart diseases, and other conditions. It was expected well to provide significant insights to physicians, allowing them to adjust their diagnosis and care on a patient-by-patient basis (Chang et al., 2022). In this project I used linear regression model, random forest classifier, catboost algorithm and 3-layers tensorflow network for binary classification of heart disease.
 
 # Research workflow
-1. I have uploaded csv tables with data from 599999 patients with informatio rows and 14 parameters.
+1. I have uploaded csv tables with data from 599999 patients with information in rows and 14 parameters (columns).
    A link for the dataset is: https://www.kaggle.com/competitions/tech-weekend-data-science-hackathon/data
    
 2. Data analysis.
@@ -56,7 +56,7 @@ Dataframe doesn't have any duplicates, missing data (NA) or artifacts.
    After I proceeded with correlation analysis that is necessary for each model. In case there are any high correlations we should delete one of the features that correlates with the other one.
    For quantitive data there were no high correlations found
    <img width="977" height="887" alt="image" src="https://github.com/user-attachments/assets/f2b2ea02-4557-4226-88ef-8949e8a7ebcc" />
-   For all data including categorial statistical algorithm has found quite high correlations (slope - oldpeack, class - thal >0.5 correlation level). 
+   For all data including categorial data, statistical algorithm has found quite high correlations (slope - oldpeack, class - thal >0.5 correlation level). 
    <img width="1010" height="919" alt="image" src="https://github.com/user-attachments/assets/a4b0f2b4-1fd8-467d-8755-a2bb025f26f4" />
 
    To be on safe side and make balanced ML models I have decided to use PCA (Principal Component Analysis) to get rid of correlations effect.
@@ -64,7 +64,8 @@ Dataframe doesn't have any duplicates, missing data (NA) or artifacts.
    All categorial data are already in proper integer format so I haven't made any encoding of data.
 
 5. Models developmet.
-   The aim is to make binary classification of patients depending on their analysis results. For discrimination I used data in column "class" (as y).
+   The aim is to make binary classification of patients depending on their analysis results. For discrimination I used data in column "class" (as y) - person does have heart disease or does not.
+   
    # Linear regression model
    Model showed following metrics after learning and testing:
    
@@ -79,7 +80,7 @@ Precision: 0.6734360667767382
 Recall: 0.5260073365048432
 F1-score: 0.5906611530354471
 
-There are no signs of overfitting because results for train and test data are equal. But accuracy and recall of model are not very good. In general this model is not very reliable.
+There are no signs of overfitting because results for train and test data are equal. But accuracy and recall of the model are not very good. In general this model is not very reliable.
 After PCA we have only 3 features left and those features are not the same as in initial data because they include other features that were processed during PCA application.
 <img width="989" height="590" alt="image" src="https://github.com/user-attachments/assets/8a59dfbe-a443-4c9f-8d73-be965d1a988c" />
 
@@ -98,7 +99,7 @@ Recall: 0.6004613973749069
 F1-score: 0.627085671530116
 
 There are no signs of overfitting because results for train and test data are equal. Accuracy and recall of model are better then for linear regression. But still this model is not very reliable.
-I am not satisfied with results of the model and try optimization with a help of Optuna library. Score for optimmization will be 'Recall' because it's oblicatory to have as low amount of False Negatives for medical prognosis as possible. I have tried small amount of trials with Optuna due to linitations of my local computer.
+I am not satisfied with results of the model and try optimization with a help of Optuna library. Score for optimmization will be 'Recall' because it's obligatory to have as low amount of False Negatives for medical prognosis as possible. I have tried small amount of trials with Optuna due to limitations of my local computer.
 After Optuna optimization best parameters have been found on grid. Metrics for Random Forest Classifier model with new parameters became:
 Metrics for train data:
 Accuracy: 0.7189452755160007
@@ -115,7 +116,7 @@ Optuna algorithm of optimization haven't change much our results. Results for te
 
 # Catboost model
 CatBoost algorithm is well-known high-performance gradient boosting library for decision trees classifier. It is specially dedicated to work with categorial data without additional data transformation. I decided to try this algorithm on our initial data before PCA application. 
-Metrics for train and test data with initial data are much better than data after PCA algorithm.
+Metrics for train and test data with initial data are much better than data after PCA algorithm and Random Forest.
 
 Metrics for train data:
 Accuracy: 0.9111253129668203
@@ -133,7 +134,8 @@ Let's have a look on features importance chart:
 <img width="989" height="590" alt="image" src="https://github.com/user-attachments/assets/ea7ad20e-5be7-44ae-8b82-d57d677a35a8" />
 
 
-If we compare this feature importance data with correlation matrix we'll see that most influence on model have more correlated features vs class from correlation matrix that is logical. Even though in general for ML models we need to avoid features with high correlations for this particular case such model with more correlated features works much better and more reliable in all metrics. 
+If we compare this feature importance data with correlation matrix, we'll see that more correlated features vs 'class' from correlation matrix have more influence on model. It is logical. Even though in general for ML models we need to avoid features with high correlations for this particular case such model with more correlated features worked much better and more reliable for all metrics. 
+
 # Top-5 prognostic features for heart disease are: 'maximum heart rate achieved', 'thal', 'number_of_major_vessels', 'chest', 'age'
 
 
@@ -141,7 +143,9 @@ If we compare this feature importance data with correlation matrix we'll see tha
 # Neural Network based on TensorFlow library
 According to literature even simple neaural networks can solve classification tasks with better scores than classical ML models. I have tried to develop 3-layers simple network with Adam optimization on initial data like I used in CatBoost model.
 Here is a structure of model used:
+
 Model: "sequential"
+
 ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┓
 ┃ Layer (type)                    ┃ Output Shape           ┃       Param # ┃
 ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━┩
@@ -177,6 +181,6 @@ We also had second dataset in study. I have made a classes prediction for this d
 
 # Summary
 
-Machine Learning and Deep Learning are powerfull tools for disease prognosis. During this stude I have revealed that data transformation should bve made very careful as it has a direct influence on model quality. If it is possible it is good to try several variants with and withoud additional transformations.
-In our study CatBoost model and Tensorflow 3-layers neural network worked the best. Main features that have an influence on model and final prognosis are: 'maximum heart rate achieved', 'thal', 'number_of_major_vessels', 'chest', 'age'.
+Machine Learning and Deep Learning are powerfull tools for disease prognosis. During this study I have revealed that data transformation should be made very careful as it has a direct influence on model quality. If it is possible it is good to try several variants with and withoud additional transformations.
+In our study CatBoost model and Tensorflow 3-layers neural network worked the best (Accuracy: 0.90, Precision: 0.89, Recall: 0.87, F1-score: 0.88). Main features that have an influence on model and final prognosis are: 'maximum heart rate achieved', 'thal', 'number_of_major_vessels', 'chest', 'age'. Fore detailed code please refer to attached .ipynb file.
 
