@@ -130,7 +130,7 @@ F1-score: 0.8864924171881879
 
 Let's have a look on features importance chart:
 
-<img width="989" height="590" alt="image" src="https://github.com/user-attachments/assets/4c33ceae-00c4-49cb-b8a0-52675ba5e036" />
+<img width="989" height="590" alt="image" src="https://github.com/user-attachments/assets/ea7ad20e-5be7-44ae-8b82-d57d677a35a8" />
 
 
 If we compare this feature importance data with correlation matrix we'll see that most influence on model have more correlated features vs class from correlation matrix that is logical. Even though in general for ML models we need to avoid features with high correlations for this particular case such model with more correlated features works much better and more reliable in all metrics. 
