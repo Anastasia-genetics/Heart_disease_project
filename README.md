@@ -182,5 +182,5 @@ We also had second dataset in study. I have made a classes prediction for this d
 # Summary
 
 Machine Learning and Deep Learning are powerfull tools for disease prognosis. During this study I have revealed that data transformation should be made very careful as it has a direct influence on model quality. If it is possible it is good to try several variants with and withoud additional transformations.
-In our study CatBoost model and Tensorflow 3-layers neural network worked the best (Accuracy: 0.90, Precision: 0.89, Recall: 0.87, F1-score: 0.88). Main features that have an influence on model and final prognosis are: 'maximum heart rate achieved', 'thal', 'number_of_major_vessels', 'chest', 'age'. Fore detailed code please refer to attached .ipynb file.
+In our study CatBoost model and Tensorflow 3-layers neural network worked the best (Accuracy: 0.90, Precision: 0.89, Recall: 0.87, F1-score: 0.88). Main features that have an influence on model and final prognosis are: 'maximum heart rate achieved', 'thal', 'number_of_major_vessels', 'chest', 'age'. For detailed code please refer to attached .ipynb file.
 
